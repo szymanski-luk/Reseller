@@ -1,0 +1,62 @@
+﻿@model ProjectReseller.Models.item
+
+@{
+    ViewBag.Title = "Details";
+    var imagePath = @"\images\";
+}
+
+
+<br />
+
+    <div class="row">
+        <div class="col-8" style="background-color: #241c30; color: white; padding: 10px;">
+            <img src="@(imagePath + Html.DisplayFor(model => model.image))" class="img-fluid" style="max-width: 100%; height: auto;" alt="Responsive image">
+            <hr />
+            <h1>
+                @Html.DisplayFor(model => model.name)
+            </h1>
+            <hr />
+            <p class="lead">
+                @Html.DisplayFor(model => model.description)
+            </p>
+            <hr />
+            <p>
+                <b>Kategoria: </b> @Html.DisplayFor(model => model.category.name)
+            </p>
+
+        </div>
+        <div class="col-4" style="background-color: #8e42ff; color: white; padding: 10px;">
+            <hr />
+            <h1 style="text-align: center">
+                @Html.DisplayFor(model => model.price) zł
+            </h1>
+
+            <hr />
+            <h4 style="text-align: center">
+                @Html.DisplayFor(model => model.users.name)
+            </h4>
+            <hr />
+            <h5 style="text-align: center">
+                @Html.DisplayFor(model => model.users.city)
+            </h5>
+            <hr />
+            <h6 style="text-align: center">
+                @Html.DisplayFor(model => model.date)
+            </h6>
+            <hr />
+            @if (Model.sold is false) {
+                <a href="#" class="btn btn-dark btn-lg btn-block" role="button" aria-pressed="true">Kup teraz</a>
+            }
+            else {
+                <button disabled class="btn btn-dark btn-lg btn-block" role="button" aria-pressed="true">Sprzedane</button>
+            }
+        </div>
+    </div>
+   
+
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
