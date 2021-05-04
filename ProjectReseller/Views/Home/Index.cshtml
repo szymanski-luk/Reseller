@@ -13,7 +13,7 @@
         @foreach (var item in Model) {
         
 
-            <div class="col-lg-4">
+            <div class="col-lg-4 mt-4">
                 <div class="card shadow-sm" style="background-color: #8e42ff; color: white;">
                     <img class="card-img-top" style="height: 15vw; object-fit: cover;" src="@(imagePath + Html.DisplayFor(modelItem => item.image))" alt="Card image cap">
                     <div class="card-body">
@@ -21,7 +21,7 @@
                         <p class="card-text">@Html.DisplayFor(modelItem => item.description)</p>
                         <div class="row">
                             <div class="col-6">
-                                <p class="card-text"><small style="color: #67d5db">@Html.DisplayFor(modelItem => item.users_name)</small></p>
+                                <p class="card-text"><small><a style="color: #67d5db" href="@Url.Action("Details", "User", new { id = item.users_id })">@Html.DisplayFor(modelItem => item.users_name)</a></small></p>
                             </div>
                             <div class="col-6">
                                 <h6 style="text-align: right">@Html.DisplayFor(modelItem => item.price) zł</h6>

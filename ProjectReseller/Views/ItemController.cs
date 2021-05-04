@@ -5,79 +5,74 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ProjectReseller.Controllers
+namespace ProjectReseller.Views
 {
-    public class UserController : Controller
+    public class ItemController : Controller
     {
         private ResellerEntities1 _db = new ResellerEntities1();
-        // GET: User
+        // GET: Item
         public ActionResult Index()
         {
-            return View(_db.users.ToList());
+            return View(_db.item.ToList());
         }
 
-        // GET: User/Details/5
+        // GET: Item/Details/5
         public ActionResult Details(int id)
         {
-            return View(_db.users.Find(id));
+            return View();
         }
 
-        // GET: User/Create
+        // GET: Item/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: User/Create
+        // POST: Item/Create
         [HttpPost]
-        public ActionResult Create(users collection)
+        public ActionResult Create(FormCollection collection)
         {
             try
             {
-                _db.users.Add(collection);
-                _db.SaveChanges();
+                // TODO: Add insert logic here
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View(collection);
+                return View();
             }
         }
 
-        // GET: User/Edit/5
+        // GET: Item/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(_db.users.Find(id));
+            return View();
         }
 
-        // POST: User/Edit/5
+        // POST: Item/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
-            var oldCollection = _db.users.Find(id);
             try
             {
-                if(TryUpdateModel(oldCollection, new string [] {"name", "password", "city", "postcode", "phone", "account_type"})) {
-                    _db.SaveChanges();
-                }
                 // TODO: Add update logic here
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View(collection);
+                return View();
             }
         }
 
-        // GET: User/Delete/5
+        // GET: Item/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: User/Delete/5
+        // POST: Item/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
