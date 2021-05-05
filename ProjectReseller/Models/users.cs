@@ -11,7 +11,8 @@ namespace ProjectReseller.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class users
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,11 +26,17 @@ namespace ProjectReseller.Models
         }
     
         public int id { get; set; }
+        [DisplayName("Nazwa")]
         public string name { get; set; }
+        [DisplayName("Has³o")]
         public string password { get; set; }
+        [DisplayName("Miasto")]
         public string city { get; set; }
+        [DisplayName("Kod pocztowy")]
         public string postcode { get; set; }
+        [DisplayName("Numer telefonu")]
         public string phone { get; set; }
+        [DisplayName("Typ konta")]
         public Nullable<int> account_type { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

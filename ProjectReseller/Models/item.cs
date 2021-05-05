@@ -11,7 +11,8 @@ namespace ProjectReseller.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+
     public partial class item
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -28,6 +29,9 @@ namespace ProjectReseller.Models
         public string description { get; set; }
         public Nullable<int> price { get; set; }
         public string image { get; set; }
+
+        public HttpPostedFileBase ImageFile { get; set; }
+
         public Nullable<System.DateTime> date { get; set; }
         public Nullable<bool> sold { get; set; }
     
