@@ -1,6 +1,7 @@
 ﻿using ProjectReseller.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -30,17 +31,28 @@ namespace ProjectReseller.Views
 
         // POST: Item/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(item newItem)
         {
             try
             {
-                // TODO: Add insert logic here
+                string fileName = Path.GetFileNameWithoutExtension(newItem.ImageFile.FileName);
+                string extension = Path.GetExtension(newItem.ImageFile.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                newItem.image = fileName;
+                fileName = Path.Combine(Server.MapPath("~/images/"), fileName);
+                newItem.ImageFile.SaveAs(fileName);
+                newItem.category_id = 1;
+                newItem.users_id = 1;
+                newItem.sold = false;
+
+                _db.item.Add(newItem);
+                _db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View(newItem);
             }
         }
 

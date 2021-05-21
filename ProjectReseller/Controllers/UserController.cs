@@ -45,6 +45,31 @@ namespace ProjectReseller.Controllers
             }
         }
 
+        // GET: User/Login
+        public ActionResult Login() {
+            return View();
+        }
+
+        // POST: User/Login
+        [HttpPost]
+        public ActionResult Login(users user) {
+            try {
+                users existingUser = _db.users.First(x => x.name == user.name);
+                if (existingUser != null) {
+                    if (existingUser.password == user.password) {
+                        Session["user"] = existingUser;
+                        return RedirectToAction("Index", "Home");
+                    }
+                }
+                ViewBag.Message = "Nieprawidłowe dane logowania";
+                return View();
+            }
+            catch {
+                ViewBag.Message = "Nieprawidłowe dane logowania";
+                return View();
+            }
+        }
+
         // GET: User/Edit/5
         public ActionResult Edit(int id)
         {
