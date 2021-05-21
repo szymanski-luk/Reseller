@@ -57,6 +57,7 @@ namespace ProjectReseller.Controllers
                 users existingUser = _db.users.First(x => x.name == user.name);
                 if (existingUser != null) {
                     if (existingUser.password == user.password) {
+                        existingUser.password = "";
                         Session["user"] = existingUser;
                         return RedirectToAction("Index", "Home");
                     }
@@ -68,6 +69,15 @@ namespace ProjectReseller.Controllers
                 ViewBag.Message = "Nieprawidłowe dane logowania";
                 return View();
             }
+        }
+
+        // GET: User/Logout
+        public ActionResult Logout() {
+            if (Session["user"] != null) {
+                Session["user"] = null;
+                return RedirectToAction("Index", "Home");
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: User/Edit/5

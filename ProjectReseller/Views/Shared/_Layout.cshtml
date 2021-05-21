@@ -32,7 +32,7 @@
                                 Zalogowano jako @((Session["user"] as users).name)
                             </span>
                         </li>
-                        <li class="nav-item"><text class="nav-link">@Html.ActionLink("Wyloguj", "Index", "Item")</text></li>
+                        <li class="nav-item"><text class="nav-link">@Html.ActionLink("Wyloguj", "Logout", "User")</text></li>
                     }
                     else {
                         <li class="nav-item"><text class="nav-link">@Html.ActionLink("Zaloguj", "Login", "User")</text></li>
