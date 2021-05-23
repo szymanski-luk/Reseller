@@ -22,6 +22,8 @@ namespace ProjectReseller.Controllers
             return View(_db.users.Find(id));
         }
 
+        
+
         // GET: User/Create
         public ActionResult Create()
         {

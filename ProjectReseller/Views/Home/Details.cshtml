@@ -33,7 +33,7 @@
 
             <hr />
             <h4 style="text-align: center">
-                @Html.DisplayFor(model => model.users.name)
+                <a style="color: white;" href="@Url.Action("Details", "User", new { id = Model.users_id })">@Html.DisplayFor(model => model.users.name)</a>
             </h4>
             <hr />
             <h5 style="text-align: center">
