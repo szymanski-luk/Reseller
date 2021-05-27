@@ -27,15 +27,21 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     @if (Session["user"] != null) {
-                        <li class="nav-item">
-                            <span class="navbar-text">
-                                Zalogowano jako @((Session["user"] as users).name)
-                            </span>
-                        </li>
+                    <li class="nav-item dropdown" style="background-color: #8e42ff; padding-left: 20px; padding-right: 20px">
+                        <a class="nav-link dropdown-toggle"  style="color: white" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <b>@((Session["user"] as users).name)</b>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background-color: #ba8dfc">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
                         <li class="nav-item"><text class="nav-link">@Html.ActionLink("Wyloguj", "Logout", "User")</text></li>
                     }
                     else {
-                        <li class="nav-item"><text class="nav-link">@Html.ActionLink("Zaloguj", "Login", "User")</text></li>
+                        <li class="nav-item"><text class="nav-link">@Html.ActionLink("Logowanie", "Login", "User")</text></li>
+                        <li class="nav-item"><text class="nav-link">@Html.ActionLink("Rejestracja", "Create", "User")</text></li>
                     }
                 </ul>
                 
