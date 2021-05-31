@@ -9,16 +9,16 @@
 
 @if (Session["user"] != null) {
     if ((Session["user"] as users).account_type != 0) {
-            <p>
-                @Html.ActionLink("Stwórz nową kategorię", "Create")
-            </p>
+        <p>
+            @Html.ActionLink("Stwórz nową kategorię", "Create")
+        </p>
     }
 }
 
 
 @foreach (var item in Model) {
-
-    <a href="#" class="btn btn-outline-info btn-lg btn-block" role="button" aria-pressed="true">@Html.DisplayFor(modelItem => item.name)</a>
+    
+    @Html.ActionLink(item.name, "ItemList", "Category", new {id = item.id}, new { @class = "btn btn-outline-info btn-lg btn-block"}) 
     if (Session["user"] != null) {
         if ((Session["user"] as users).account_type != 0) {
             <td>

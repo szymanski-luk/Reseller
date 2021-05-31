@@ -584,6 +584,7 @@
     <Content Include="Views\Item\Create.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\Category\ItemList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

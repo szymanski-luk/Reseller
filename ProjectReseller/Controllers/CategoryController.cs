@@ -9,6 +9,7 @@ namespace ProjectReseller.Controllers
 {
     public class CategoryController : Controller
     {
+
         private ResellerEntities1 _db = new ResellerEntities1();
         // GET: Category
         public ActionResult Index()
@@ -25,6 +26,13 @@ namespace ProjectReseller.Controllers
         // GET: Category/Create
         public ActionResult Create()
         {
+            if (Session["user"] == null) {
+                return RedirectToAction("Index");
+            }
+            else if ((Session["user"] as users).account_type == 0) {
+                return RedirectToAction("Index");
+            }
+
             return View();
         }
 
@@ -32,6 +40,7 @@ namespace ProjectReseller.Controllers
         [HttpPost]
         public ActionResult Create(category collection)
         {
+
             try
             {
                 _db.category.Add(collection);
@@ -47,6 +56,13 @@ namespace ProjectReseller.Controllers
         // GET: Category/Edit/5
         public ActionResult Edit(int id)
         {
+            if (Session["user"] == null) {
+                return RedirectToAction("Index");
+            }
+            else if ((Session["user"] as users).account_type == 0) {
+                return RedirectToAction("Index");
+            }
+
             return View(_db.category.Find(id));
         }
 
@@ -69,9 +85,18 @@ namespace ProjectReseller.Controllers
             }
         }
 
+        
+
         // GET: Category/Delete/5
         public ActionResult Delete(int id)
         {
+            if (Session["user"] == null) {
+                return RedirectToAction("Index");
+            }
+            else if ((Session["user"] as users).account_type == 0) {
+                return RedirectToAction("Index");
+            }
+
             return View(_db.category.Find(id));
         }
 
@@ -97,6 +122,12 @@ namespace ProjectReseller.Controllers
             {
                 return View(categoryToDelete);
             }
+        }
+
+        // GET: Category/ItemList/5
+        public ActionResult ItemList(int id) {
+            ViewBag.CategoryName = _db.category.Find(id).name;
+            return View(_db.item.Where(x => x.category_id == id));
         }
     }
 }
