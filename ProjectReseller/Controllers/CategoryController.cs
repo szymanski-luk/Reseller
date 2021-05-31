@@ -72,22 +72,30 @@ namespace ProjectReseller.Controllers
         // GET: Category/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(_db.category.Find(id));
         }
 
         // POST: Category/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(category categoryToDelete)
         {
             try
             {
-                // TODO: Add delete logic here
+                var toDelete = _db.category.Find(categoryToDelete);
+
+                if (!ModelState.IsValid) {
+                    return View(toDelete);
+                }
+                else {
+                    _db.category.Remove(toDelete);
+                    _db.SaveChanges();
+                }
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View(categoryToDelete);
             }
         }
     }
