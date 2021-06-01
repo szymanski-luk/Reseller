@@ -11,6 +11,7 @@ namespace ProjectReseller.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Web;
 
     public partial class item
@@ -25,16 +26,27 @@ namespace ProjectReseller.Models
         public int id { get; set; }
         public int users_id { get; set; }
         public int category_id { get; set; }
+
+        [DisplayName("Nazwa")]
         public string name { get; set; }
+
+        [DisplayName("Opis")]
         public string description { get; set; }
+
+        [DisplayName("Cena")]
         public Nullable<int> price { get; set; }
+
+        [DisplayName("Zdjêcie")]
         public string image { get; set; }
 
+        [DisplayName("Zdjêcie")]
         public HttpPostedFileBase ImageFile { get; set; }
 
+        [DisplayName("Data")]
         public Nullable<System.DateTime> date { get; set; }
         public Nullable<bool> sold { get; set; }
-    
+
+        [DisplayName("Kategoria")]
         public virtual category category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<delivery> delivery { get; set; }

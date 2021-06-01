@@ -26,12 +26,20 @@ namespace ProjectReseller.Views
         // GET: Item/Create
         public ActionResult Create()
         {
+            if (Session["user"] == null) {
+                return RedirectToAction("Index");
+            }
+            else if ((Session["user"] as users).account_type == 0) {
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Options = new SelectList(_db.category, "name", "name");
             return View();
         }
 
         // POST: Item/Create
         [HttpPost]
-        public ActionResult Create(item newItem)
+        public ActionResult Create(item newItem, FormCollection form)
         {
             try
             {
@@ -41,9 +49,15 @@ namespace ProjectReseller.Views
                 newItem.image = fileName;
                 fileName = Path.Combine(Server.MapPath("~/images/"), fileName);
                 newItem.ImageFile.SaveAs(fileName);
-                newItem.category_id = 1;
-                newItem.users_id = 1;
                 newItem.sold = false;
+
+                int userId = (Session["user"] as users).id;
+                newItem.users_id = userId;
+
+                string categoryName = form["categoryName"].ToString();
+                int catId = _db.category.FirstOrDefault(x => x.name == categoryName).id;
+                newItem.category_id = catId;
+
 
                 _db.item.Add(newItem);
                 _db.SaveChanges();
