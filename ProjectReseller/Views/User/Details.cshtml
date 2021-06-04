@@ -1,66 +1,52 @@
 ﻿@model ProjectReseller.Models.users
+@using ProjectReseller.Models
 
 @{
     ViewBag.Title = "Details";
+
+    var imagePath = @"\images\";
 }
 
-<h2>Details</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-12 mt-4" style="background-color: #241c30; color: white; padding: 10px;">
+            <h3>
+                @Html.DisplayFor(model => model.name)
+            </h3>
+            <hr>
+            <h5>
+                @Html.DisplayFor(model => model.phone)
+            </h5>
+            <hr>
+            <h5>
+                @Html.DisplayFor(model => model.city)
+            </h5>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12">
+            <div class="row">
+                @foreach (var item in (IEnumerable<item>)ViewData["Items"]) {
+                    <div class="col-lg-6 mt-4">
+                        <div class="card shadow-sm" style="background-color: #8e42ff; color: white;">
+                            <img class="card-img-top" style="height: 15vw; object-fit: cover;" src="@(imagePath + Html.DisplayFor(modelItem => item.image))" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">@Html.DisplayFor(modelItem => item.name)</h5>
+                                <p class="card-text">@(Html.DisplayFor(modelItem => item.description).ToString().Substring(0, 30))...</p>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p class="card-text"><small><a style="color: #67d5db" href="@Url.Action("Details", "User", new { id = item.users_id })">@Html.DisplayFor(modelItem => item.users.name)</a></small></p>
+                                    </div>
+                                    <div class="col-6">
+                                        <h6 style="text-align: right">@Html.DisplayFor(modelItem => item.price) zł</h6>
+                                    </div>
+                                </div>
+                                <a class="btn btn-dark btn-block" role="button" href="@Url.Action("Details", "Home", new { id = item.id })">Zobacz</a>
+                            </div>
+                        </div>
+                    </div>
+                }
 
-<div>
-    <h4>users</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.password)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.city)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.city)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.postcode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.postcode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.phone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.phone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.account_type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.account_type)
-        </dd>
-
-    </dl>
+            </div>
+        </div>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

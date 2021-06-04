@@ -3,6 +3,8 @@
 
 @{
     ViewBag.Title = "Lista wszystkich ogłoszeń";
+
+    var imagePath = @"\images\";
 }
 
 <h2>Lista ogłoszeń</h2>
@@ -14,67 +16,27 @@
     }
 }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.image)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.date)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.sold)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.category.name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.users.name)
-        </th>
-        <th></th>
-    </tr>
-
+<div class="row">
     @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.image)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.sold)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.category.name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.users.name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+        if (item.sold == false) { 
+            <div class="col-lg-4 mt-4">
+                <div class="card shadow-sm" style="background-color: #8e42ff; color: white;">
+                    <img class="card-img-top" style="height: 20vw; object-fit: cover;" src="@(imagePath + Html.DisplayFor(modelItem => item.image))" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.name)</h5>
+                        <p class="card-text">@(Html.DisplayFor(modelItem => item.description).ToString().Substring(0, 30))...</p>
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="card-text"><small><a style="color: #67d5db" href="@Url.Action("Details", "User", new { id = item.users_id })">@Html.DisplayFor(modelItem => item.users.name)</a></small></p>
+                            </div>
+                            <div class="col-6">
+                                <h6 style="text-align: right">@Html.DisplayFor(modelItem => item.price) zł</h6>
+                            </div>
+                        </div>
+                        <a class="btn btn-dark btn-block" role="button" href="@Url.Action("Details", "Home", new { id = item.id })">Zobacz</a>
+                    </div>
+                </div>
+            </div>
+        }
     }
-
-</table>
+</div>

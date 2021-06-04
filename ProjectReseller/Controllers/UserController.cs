@@ -19,6 +19,7 @@ namespace ProjectReseller.Controllers
         // GET: User/Details/5
         public ActionResult Details(int id)
         {
+            ViewData["Items"] = _db.item.Where(x => x.users_id == id);
             return View(_db.users.Find(id));
         }
 
