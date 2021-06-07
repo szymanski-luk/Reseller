@@ -51,6 +51,8 @@ namespace ProjectReseller.Views
                 newItem.ImageFile.SaveAs(fileName);
                 newItem.sold = false;
 
+                newItem.date = DateTime.Now;
+
                 int userId = (Session["user"] as users).id;
                 newItem.users_id = userId;
 

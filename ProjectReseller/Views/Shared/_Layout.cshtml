@@ -33,6 +33,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="background-color: #ba8dfc">
                             @Html.ActionLink("Moje konto", "Details", "User", new { id = (Session["user"] as users).id }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Moje zamówienia", "MyOrders", "Delivery", null, new { @class="dropdown-item" })
                             <a class="dropdown-item" href="#">Ustawienia</a>
                             @Html.ActionLink("Wyloguj", "Logout", "User", null, new { @class = "dropdown-item" })
                         </div>

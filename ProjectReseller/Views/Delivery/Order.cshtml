@@ -18,15 +18,11 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.price) zł
+            @Html.DisplayFor(model => model.price)
         </dd>
 
-        <a href="#" class="btn btn-primary" role="button" aria-pressed="true">Tak</a>
-        <a href="#" class="btn btn-danger" role="button" aria-pressed="true">Nie</a>
+        <a href="@Url.Action("OrderProduct", "Delivery", new { id = Model.id })" class="btn btn-primary" role="button" aria-pressed="false">Tak</a>
+        <a href="@Url.Action("Index", "Home")" class="btn btn-danger" role="button" aria-pressed="false">Nie</a>
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

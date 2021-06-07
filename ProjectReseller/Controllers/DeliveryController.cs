@@ -13,9 +13,36 @@ namespace ProjectReseller.Controllers
 
         // GET: Delivery/Order/5
         public ActionResult Order(int id) {
+            if (Session["user"] == null) {
+                return RedirectToAction("Index", "Home");
+            }
+            
             return View(_db.item.FirstOrDefault(x => x.id == id));
         }
 
+        // GET: Delivery/OrderProduct/
+        public ActionResult OrderProduct(int id) {
+            if (Session["user"] == null) {
+                return RedirectToAction("Index", "Home");
+            }
+
+            try {
+                var item = _db.item.FirstOrDefault(x => x.id == id);
+                item.sold = true;
+
+                delivery newDelivery = new delivery();
+                newDelivery.users_id = (Session["user"] as users).id;
+                newDelivery.item = item;
+                newDelivery.delivery_status_id = 1;
+                _db.delivery.Add(newDelivery);
+                _db.SaveChanges();
+
+                return RedirectToAction("Index", "Home");
+            }
+            catch {
+                return RedirectToAction("Index", "Home");
+            }
+        }
 
         // GET: Delivery
         public ActionResult Index()
