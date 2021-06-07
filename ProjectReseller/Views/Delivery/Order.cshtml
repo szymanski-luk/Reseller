@@ -1,0 +1,32 @@
+﻿@model ProjectReseller.Models.item
+
+@{
+    ViewBag.Title = "Potwierdź zamówienie";
+}
+
+<h2>Czy na pewno chcesz kupić ten przedmiot?</h2>
+
+<div>
+    <dl class="dl-horizontal">
+
+        <dd>
+            <h3>@Html.DisplayFor(model => model.name)</h3>
+        </dd>
+
+        <dt>
+            Cena
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.price) zł
+        </dd>
+
+        <a href="#" class="btn btn-primary" role="button" aria-pressed="true">Tak</a>
+        <a href="#" class="btn btn-danger" role="button" aria-pressed="true">Nie</a>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
