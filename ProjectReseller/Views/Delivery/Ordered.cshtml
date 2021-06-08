@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ProjectReseller.Models.delivery>
+
+@{
+    ViewBag.Title = "Ordered";
+    var imagePath = @"\images\";
+}
+
+<h2>Zamówione</h2>
+
+
+@foreach (var item in Model) {
+<div class="row">
+    <div class="col-lg-4 mt-4">
+        <div class="card shadow-sm" style="background-color: #8e42ff; color: white;">
+            <img class="card-img-top" style="height: 20vw; object-fit: cover;" src="@(imagePath + Html.DisplayFor(modelItem => item.item.image))" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(modelItem => item.item.name)</h5>
+                <p class="card-text">Status: <b>@(Html.DisplayFor(modelItem => item.delivery_status.name))</b></p>
+                <div class="row">
+                    <div class="col-12">
+                        <p class="card-text"><small>Zamawiający: <a style="color: #67d5db" href="@Url.Action("Details", "User", new { id = item.users.id })">@Html.DisplayFor(modelItem => item.users.name)</a></small></p>
+                    </div>
+                </div>
+                <a class="btn btn-dark btn-block" role="button" href="@Url.Action("Edit", "Delivery", new { id = item.item.id })">Opcje</a>
+            </div>
+        </div>
+    </div>
+</div>
+}

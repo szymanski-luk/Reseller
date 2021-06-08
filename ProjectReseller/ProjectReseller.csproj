@@ -587,6 +587,11 @@
     <Content Include="Views\Category\Delete.cshtml" />
     <Content Include="Views\Category\ItemList.cshtml" />
     <Content Include="Views\Delivery\Order.cshtml" />
+    <Content Include="Views\Delivery\MyOrders.cshtml" />
+    <Content Include="Views\Item\Delete.cshtml" />
+    <Content Include="Views\Delivery\Ordered.cshtml" />
+    <Content Include="Views\Delivery\Details.cshtml" />
+    <Content Include="Views\Delivery\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

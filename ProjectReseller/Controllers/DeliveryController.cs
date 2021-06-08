@@ -44,6 +44,30 @@ namespace ProjectReseller.Controllers
             }
         }
 
+        // GET: MyOrders
+        public ActionResult MyOrders() {
+            if (Session["user"] == null) {
+                return RedirectToAction("Index", "Home");
+            }
+
+            int userId = (Session["user"] as users).id;
+            var data = _db.delivery.Where(x => x.users_id == userId);
+
+            return View(data);
+        }
+
+
+        public ActionResult Ordered() {
+            if (Session["user"] == null) {
+                return RedirectToAction("Index", "Home");
+            }
+
+            int userId = (Session["user"] as users).id;
+            var data = _db.delivery.Where(x => x.item_users_id == userId);
+
+            return View(data);
+        }
+
         // GET: Delivery
         public ActionResult Index()
         {
@@ -53,7 +77,8 @@ namespace ProjectReseller.Controllers
         // GET: Delivery/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var item = _db.delivery.FirstOrDefault(x => x.id == id);
+            return View(item);
         }
 
         // GET: Delivery/Create
@@ -81,13 +106,21 @@ namespace ProjectReseller.Controllers
         // GET: Delivery/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            if (Session["user"] == null) {
+                return RedirectToAction("Index", "Home");
+            }
+            var item = _db.delivery.FirstOrDefault(x => x.id == id);
+            return View(item);
         }
 
         // POST: Delivery/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
+            if (Session["user"] == null) {
+                return RedirectToAction("Index", "Home");
+            }
+
             try
             {
                 // TODO: Add update logic here

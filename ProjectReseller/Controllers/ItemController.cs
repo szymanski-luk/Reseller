@@ -97,22 +97,33 @@ namespace ProjectReseller.Views
         // GET: Item/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            if (Session["user"] == null) {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var itemToDelete = _db.item.FirstOrDefault(x => x.id == id);
+            return View(itemToDelete);
         }
 
         // POST: Item/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(item itemToDelete)
         {
             try
             {
-                // TODO: Add delete logic here
+                var selItem = _db.item.Find(itemToDelete.id);
+
+                if (!ModelState.IsValid)
+                    return View(selItem);
+                _db.item.Remove(selItem);
+                _db.SaveChanges();
+                return RedirectToAction("Index", "Home");
 
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return View(itemToDelete);
             }
         }
     }

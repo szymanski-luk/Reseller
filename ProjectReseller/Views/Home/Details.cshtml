@@ -1,5 +1,5 @@
 ﻿@model ProjectReseller.Models.item
-
+@using ProjectReseller.Models
 @{
     ViewBag.Title = "Details";
     var imagePath = @"\images\";
@@ -28,7 +28,7 @@
         <div class="col-4" style="background-color: #8e42ff; color: white; padding: 10px;">
             <hr />
             <h1 style="text-align: center">
-                @Html.DisplayFor(model => model.price) zł
+                @(Html.DisplayFor(model => model.price)) zł
             </h1>
 
             <hr />
@@ -53,6 +53,12 @@
             }
             else {
                 <button disabled class="btn btn-dark btn-lg btn-block" role="button" aria-pressed="true">Sprzedane</button>
+            }
+
+            @if (Session["user"] != null) {
+                if ((Session["user"] as users).account_type != 0 || (Session["user"] as users).id == Model.users_id) {
+                    <a class="btn btn-danger btn-lg btn-block" role="button" href="@Url.Action("Delete", "Item", new { id = Model.id })" aria-pressed="true">Usuń</a>
+                }
             }
         </div>
     </div>
