@@ -1,14 +1,12 @@
 ﻿@model IEnumerable<ProjectReseller.Models.users>
+@using ProjectReseller.Models
 
 @{
     ViewBag.Title = "Lista użytkowników";
 }
 
-<h2>Index</h2>
+<h2>Użytkownicy</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -17,41 +15,31 @@
         <th>
             @Html.DisplayNameFor(model => model.city)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.postcode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.phone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.account_type)
-        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.city)
+    </td>
+    @if (Session["user"] != null) {
+        if ((Session["user"] as users).account_type != 0) {
+            <td>
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.id }) |
+                @Html.ActionLink("Zobacz", "Details", new { id = item.id }) 
+            </td>
+        }
+    }
+    else {
         <td>
-            @Html.DisplayFor(modelItem => item.name)
+            @Html.ActionLink("Zobacz", "Details", new { id = item.id })
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.city)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.postcode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.phone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.account_type)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
-        </td>
-    </tr>
+    }
+</tr>
 }
 
 </table>

@@ -11,7 +11,8 @@ namespace ProjectReseller.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class report
     {
         public int id { get; set; }
@@ -19,6 +20,7 @@ namespace ProjectReseller.Models
         public int item_category_id { get; set; }
         public int item_users_id { get; set; }
         public int item_id { get; set; }
+        [DisplayName("Treœæ zg³oszenia")]
         public string content { get; set; }
         public Nullable<bool> verified { get; set; }
     

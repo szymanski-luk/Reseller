@@ -26,17 +26,26 @@ namespace ProjectReseller.Controllers
             return View(reports);
         }
 
+        public ActionResult RedirectTo(string actionName, string controllerName, int id) {
+            return RedirectToAction(actionName, controllerName, new { id = id });
+        }
+
         // GET: Report/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
+
         // GET: Report/Create
         public ActionResult Create()
         {
+            if (Session["user"] == null) {
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
-        }
+        } 
 
         // POST: Report/Create
         [HttpPost]
