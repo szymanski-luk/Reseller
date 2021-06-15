@@ -29,9 +29,7 @@ namespace ProjectReseller.Views
             if (Session["user"] == null) {
                 return RedirectToAction("Index");
             }
-            else if ((Session["user"] as users).account_type == 0) {
-                return RedirectToAction("Index");
-            }
+            
 
             ViewBag.Options = new SelectList(_db.category, "name", "name");
             return View();

@@ -11,7 +11,9 @@ namespace ProjectReseller.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class delivery
     {
         public int id { get; set; }
@@ -22,6 +24,7 @@ namespace ProjectReseller.Models
         public int delivery_status_id { get; set; }
     
         public virtual item item { get; set; }
+        [DisplayName("Status zamówienia")]
         public virtual delivery_status delivery_status { get; set; }
         public virtual users users { get; set; }
     }

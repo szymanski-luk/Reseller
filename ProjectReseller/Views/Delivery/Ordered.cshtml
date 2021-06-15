@@ -21,7 +21,7 @@
                         <p class="card-text"><small>Zamawiający: <a style="color: #67d5db" href="@Url.Action("Details", "User", new { id = item.users.id })">@Html.DisplayFor(modelItem => item.users.name)</a></small></p>
                     </div>
                 </div>
-                <a class="btn btn-dark btn-block" role="button" href="@Url.Action("Edit", "Delivery", new { id = item.item.id })">Opcje</a>
+                <a class="btn btn-dark btn-block" role="button" href="@Url.Action("Edit", "Delivery", new { id = item.id })">Opcje</a>
             </div>
         </div>
     </div>

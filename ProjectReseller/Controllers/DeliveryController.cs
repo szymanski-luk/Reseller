@@ -109,13 +109,16 @@ namespace ProjectReseller.Controllers
             if (Session["user"] == null) {
                 return RedirectToAction("Index", "Home");
             }
+
+            ViewBag.Options = new SelectList(_db.delivery_status, "name", "name");
+
             var item = _db.delivery.FirstOrDefault(x => x.id == id);
             return View(item);
         }
 
         // POST: Delivery/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, FormCollection form)
         {
             if (Session["user"] == null) {
                 return RedirectToAction("Index", "Home");
@@ -123,13 +126,19 @@ namespace ProjectReseller.Controllers
 
             try
             {
-                // TODO: Add update logic here
+                var old = _db.delivery.FirstOrDefault(x => x.id == id);
+                string status = form["deliveryStatus"].ToString();
+                int statusId = _db.delivery_status.FirstOrDefault(x => x.name == status).id;
+                var statusObj = _db.delivery_status.FirstOrDefault(x => x.name == status);
 
-                return RedirectToAction("Index");
+                _db.Database.ExecuteSqlCommand("UPDATE delivery SET delivery_status_id = {0} WHERE id = {1}", statusId, id);
+                _db.SaveChanges();
+
+                return RedirectToAction("Ordered", "Delivery");
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index", "Home");
             }
         }
 
