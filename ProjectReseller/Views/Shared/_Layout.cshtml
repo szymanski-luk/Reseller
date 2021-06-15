@@ -24,7 +24,12 @@
                     <li class="nav-item"><text class="nav-link">@Html.ActionLink("Kategorie", "Index", "Category")</text></li>
                     <li class="nav-item"><text class="nav-link">@Html.ActionLink("Użytkownicy", "Index", "User")</text></li>
                     <li class="nav-item"><text class="nav-link">@Html.ActionLink("Rzeczy", "Index", "Item")</text></li>
-                </ul>
+                    @if (Session["user"] != null) {
+                        if((Session["user"] as users).account_type != 0) {
+                            <li class="nav-item"><text class="nav-link" style="color: darkred">@Html.ActionLink("Zgłoszenia", "Index", "Report")</text></li>
+                        }
+                    }
+                    </ul>
                 <ul class="navbar-nav ml-auto">
                     @if (Session["user"] != null) {
                     <li class="nav-item dropdown" style="background-color: #8e42ff; padding-left: 20px; padding-right: 20px">
