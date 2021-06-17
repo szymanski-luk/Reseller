@@ -48,14 +48,20 @@
                 Zadzwoń: @Html.DisplayFor(model => model.users.phone)
             </h6>
             <hr />
-            @if (Model.sold is false) {
-                <a class="btn btn-dark btn-lg btn-block" role="button" href="@Url.Action("Order", "Delivery", new { id = Model.id })" aria-pressed="true">Kup teraz</a>
+            @if (Session["user"] != null) {
+                if (Model.sold is false) {
+                    <a class="btn btn-dark btn-lg btn-block" role="button" href="@Url.Action("Order", "Delivery", new { id = Model.id })" aria-pressed="true">Kup teraz</a>
+                }
+                else {
+                    <button disabled class="btn btn-dark btn-lg btn-block" role="button" aria-pressed="true">Sprzedane</button>
+                }
             }
             else {
-                <button disabled class="btn btn-dark btn-lg btn-block" role="button" aria-pressed="true">Sprzedane</button>
+                <button disabled class="btn btn-dark btn-lg btn-block" role="button" aria-pressed="true" data-toggle="tooltip" title="Musisz się zalogować">Kup teraz</button>
             }
 
             @if (Session["user"] != null) {
+                <a class="btn btn-warning btn-lg btn-block" role="button" href="@Url.Action("Create", "Report", new { id = Model.id })" aria-pressed="true">Zgłoś</a>
                 if ((Session["user"] as users).account_type != 0 || (Session["user"] as users).id == Model.users_id) {
                     <a class="btn btn-danger btn-lg btn-block" role="button" href="@Url.Action("Delete", "Item", new { id = Model.id })" aria-pressed="true">Usuń</a>
                 }

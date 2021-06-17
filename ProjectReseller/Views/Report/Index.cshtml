@@ -48,7 +48,7 @@
     <td>
         @Html.ActionLink("Przejdź do ogłoszenia", "RedirectTo", new { actionName = "Details", controllerName = "Home", id = item.item.id })
         <br />
-        @Html.ActionLink("Ustaw jako zweryfikowane", "Details", new { /* id=item.PrimaryKey */ })
+        @Html.ActionLink("Ustaw jako zweryfikowane", "SetVerified", new { id=item.id  })
     </td>
 </tr>
 }

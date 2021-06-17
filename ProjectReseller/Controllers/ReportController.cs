@@ -18,7 +18,7 @@ namespace ProjectReseller.Controllers
                 return RedirectToAction("Index");
             }
             else if ((Session["user"] as users).account_type == 0) {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Home");
             }
 
             var reports = _db.report.ToList();
@@ -30,81 +30,48 @@ namespace ProjectReseller.Controllers
             return RedirectToAction(actionName, controllerName, new { id = id });
         }
 
-        // GET: Report/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-
-        // GET: Report/Create
-        public ActionResult Create()
+        // GET: Report/Create/5
+        public ActionResult Create(int id)
         {
             if (Session["user"] == null) {
                 return RedirectToAction("Index", "Home");
             }
+            try {
+                
+                var item = _db.item.FirstOrDefault(x => x.id == id);
+                int userId = (Session["user"] as users).id;
+                var user = _db.users.FirstOrDefault(x => x.id == userId);
+                report newReport = new report();
+                newReport.content = "Proszę sprawdzić ogłoszenie";
+                newReport.item = item;
+                newReport.users = user;
+                newReport.verified = false;
+                _db.report.Add(newReport);
+                _db.SaveChanges();
 
-            return View();
-        } 
-
-        // POST: Report/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
                 return View();
             }
-        }
-
-        // GET: Report/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Report/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
+            catch {
+                return RedirectToAction("Details", "Home", new { id = id });
             }
         }
 
-        // GET: Report/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
+
+        // GET: Report/SetVerified/5
+        public ActionResult SetVerified(int id) {
+            if (Session["user"] == null) {
+                return RedirectToAction("Index", "Home");
+            }
+            else if ((Session["user"] as users).account_type == 0) {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var report = _db.report.FirstOrDefault(x => x.id == id);
+            report.verified = true;
+            _db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
 
-        // POST: Report/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }
