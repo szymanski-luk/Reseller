@@ -107,20 +107,21 @@ namespace ProjectReseller.Views
         [HttpPost]
         public ActionResult Delete(item itemToDelete)
         {
-            try
-            {
-                var selItem = _db.item.Find(itemToDelete.id);
+            try {
+                var selItem = _db.item.FirstOrDefault(x => x.id == itemToDelete.id);
+                var selReport = _db.report.Where(x => x.item_id == itemToDelete.id);
+
+                foreach (var report in selReport) {
+                    _db.report.Remove(report);
+                }
 
                 if (!ModelState.IsValid)
                     return View(selItem);
                 _db.item.Remove(selItem);
                 _db.SaveChanges();
                 return RedirectToAction("Index", "Home");
-
-                return RedirectToAction("Index");
             }
-            catch
-            {
+            catch {
                 return View(itemToDelete);
             }
         }

@@ -24,7 +24,13 @@
                     <img class="card-img-top" style="height: 20vw; object-fit: cover;" src="@(imagePath + Html.DisplayFor(modelItem => item.image))" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">@Html.DisplayFor(modelItem => item.name)</h5>
-                        <p class="card-text">@(Html.DisplayFor(modelItem => item.description).ToString().Substring(0, 30))...</p>
+                        @if ((item.description).Length < 33) {
+                            <p class="card-text">@(Html.DisplayFor(modelItem => item.description))</p>
+                        }
+                        else {
+                            <p class="card-text">@(Html.DisplayFor(modelItem => item.description).ToString().Substring(0, 30))...</p>
+                        }
+
                         <div class="row">
                             <div class="col-6">
                                 <p class="card-text"><small><a style="color: #67d5db" href="@Url.Action("Details", "User", new { id = item.users_id })">@Html.DisplayFor(modelItem => item.users.name)</a></small></p>

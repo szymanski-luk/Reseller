@@ -40,7 +40,7 @@ namespace ProjectReseller.Controllers
                 _db.users.Add(collection);
                 _db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Login");
             }
             catch
             {
