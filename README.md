@@ -1,8 +1,13 @@
 # Reseller
 A web application made for selling second-hand things. Made in [ASP.NET MVC](https://dotnet.microsoft.com/apps/aspnet/mvc).
 
-## Roles and privileges
-I made roles and privileges by myself. Type of user is saved in database (MSSQL). Administrator and moderator can modify and delete advertisments, that roles can also  view and resolve reports about errors in the advertisements. Normal user can report these errors.  
+## Features
+
+* User accounts
+* Creating/updating/deleting sale announcement
+* Searching by category
+* Roles and privileges
+
 
 ## Screenshots
 Some screenshots that show my work below.
